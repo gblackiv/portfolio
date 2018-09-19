@@ -257,7 +257,8 @@ $(function() {
                     format: "on"
                 });
             }
-           
+            $('.dynamicPhoneCreation').text(' (909) 454-8451')
+            $('.dynamicEmailCreation').text(' blackmongerry@gmail.com')
     });
 
 });
