@@ -129,7 +129,7 @@ $(function() {
             var myVal = $(this).attr('data-value');
             if(bottom_of_window > bottom_of_object) {
                 $(this).css({
-                  width : myVal
+                  width : myVal + "%"
                 });
             }
         });
