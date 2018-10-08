@@ -229,6 +229,14 @@ $(function() {
     }
 
     SetResizeContent();
+    function sendEmail( event ){
+        $.ajax({
+            url: 'mail_handler.php',
+            method: 'post',
+            
+        })
+        $('#email').val();
+    }
 
     $(document).ready(function() {
        
