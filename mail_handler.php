@@ -33,9 +33,9 @@ $mail->addReplyTo( $_POST['email'] );                          // Add a reply-to
 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = $_POST['subject'];
+$mail->Subject = 'From my php_mailer';
 //$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->Body = $_POST['body'];
+$mail->Body = $_POST['message'];
 
 if(!$mail->send()) {
     echo 'Message could not be sent.';

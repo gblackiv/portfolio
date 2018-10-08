@@ -232,12 +232,20 @@ $(function() {
     function sendEmail( event ){
         $.ajax({
             url: 'mail_handler.php',
-            method: 'post',
-            
-        })
-        $('#email').val();
+            method: 'POST',
+            data: {
+                email: $('#email').val(),
+                name: $('#name').val(),
+                message: $('#message').val()
+            },
+            success: () => {
+                $('#email').val('');
+                $('#name').val('');
+                $('#message').val('');
+            }
+        });
     }
-
+    $('#submit').click( sendEmail );
     $(document).ready(function() {
        
         // Default owlCarousel
