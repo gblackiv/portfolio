@@ -229,6 +229,7 @@ $(function() {
     }
 
     SetResizeContent();
+
     function sendEmail( event ){
         $.ajax({
             url: 'mail_handler.php',
@@ -242,6 +243,8 @@ $(function() {
                 $('#email').val('');
                 $('#name').val('');
                 $('#message').val('');
+                $('.modal').modal();
+
             }
         });
     }
