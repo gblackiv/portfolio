@@ -231,22 +231,51 @@ $(function() {
     SetResizeContent();
 
     function sendEmail( event ){
-        $.ajax({
-            url: 'mail_handler.php',
-            method: 'POST',
-            data: {
-                email: $('#email').val(),
-                name: $('#name').val(),
-                message: $('#message').val()
-            },
-            success: () => {
-                $('#email').val('');
-                $('#name').val('');
-                $('#message').val('');
-                $('.modal').modal();
-
-            }
-        });
+        var emailRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/g;
+        var email = $('#email').val();
+        var emailResult = emailRegex.test( email );
+        if( !emailResult ){
+            $('.modal-body p').text('Please enter a valid email address.');
+        }
+        var nameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+        var name = $('#name').val();
+        var nameResult = nameRegex.test( name );
+        if( !nameResult ){
+            $('.modal-body p').text(`Please enter a valid name.`);
+        }
+        if( !nameResult && !emailResult ){
+            $('.modal-body p').text(`Please enter a valid name and email address.`);
+        }
+        var message = $('#message').val();
+        if( !message ){
+            $('.modal-body p').text(`Please enter a message.`);
+        }
+        if( !message && !emailResult && !nameResult ){
+            $('.modal-body p').text(`Please fill out the form.`);
+        }
+        if( nameResult && emailResult && message ){
+            $.ajax({
+                url: 'mail_handler.php',
+                method: 'POST',
+                data: {
+                    email,
+                    name,
+                    message
+                },
+                success: () => {
+                    $('#email').val('');
+                    $('#name').val('');
+                    $('#message').val('');
+                    $('.modal-title').text('Your email has been sent')
+                    $('.modal-body p').text(`Thank you for reaching out to me! I will respond back to ${email} as soon as I can.`)
+                    $('.modal').modal();
+                }
+            });
+        }
+        else{
+            $('.modal-title').text('A field was filled out incorrectly')
+            $('.modal').modal();
+        }
     }
     $('#submit').click( sendEmail );
     $(document).ready(function() {
@@ -261,13 +290,13 @@ $(function() {
         });
 
        // Contact form
-        var form = $('.contact-form');
-        form.submit(function() {
-            $.post(form.attr('action'), $('.contact-form').serialize(), function(data) {
-                form.prev().text(data.message).fadeIn().delay(3000).fadeOut();
-            }, 'json');
-            return false;
-        });
+        // var form = $('.contact-form');
+        // form.submit(function() {
+        //     $.post(form.attr('action'), $('.contact-form').serialize(), function(data) {
+        //         form.prev().text(data.message).fadeIn().delay(3000).fadeOut();
+        //     }, 'json');
+        //     return false;
+        // });
 
         // CountDown for coming soon page
             if ($(".countdown").length !== 0) {
