@@ -1644,5 +1644,10 @@ ul.countdown li {
   .header .caption h1 {
     font-size: 20px;
     margin-top: 5px; } }
+@media screen and (max-height: 415px){
+  .navbar *{
+    padding: 0px;
+  }
 
+}
 /*# sourceMappingURL=style.css.map */
