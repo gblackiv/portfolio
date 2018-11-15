@@ -259,7 +259,7 @@ $(function() {
             $('.modal-body p').text(`Please fill out the form.`);
         }
         if( nameResult && emailResult && message && online ){
-            $('section div.col-md-12.text-center button').append(spinner);
+            $('body').append(spinner);
             $.ajax({
                 url: 'mail_handler.php',
                 method: 'POST',
@@ -320,7 +320,7 @@ $(function() {
             }
         $('.dynamicPhoneCreation').text(' (909) 454-8451');
         $('.dynamicEmailCreation').text(' blackmongerry@gmail.com');
-        spinner = $('<div>', {class: 'loader'});
+        spinner = $('<div>', {class: 'email-loader'});
 
         });
 
