@@ -1640,15 +1640,18 @@ ul.countdown li {
 
   .footer-social a {
     margin: 0 10px; } }
-  .loader {
+  .email-loader {
     border: 16px solid #000000;
     border-top: 16px solid #6c7e8a;
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    animation: spin 2s linear infinite;
     z-index: 1000;
-    left: 40%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 2s linear infinite;
   }
 
   @keyframes spin {
