@@ -86,7 +86,7 @@ $(function() {
 
     // navbar scrolling background
     wind.on("scroll",function () {
-
+        
         var bodyScroll = wind.scrollTop(),
             navbar = $(".navbar"),
             navbloglogo = $(".blog-nav .logo> img"),
@@ -230,7 +230,12 @@ $(function() {
 
     SetResizeContent();
 
+
     function sendEmail( event ){
+        var online = navigator.onLine;
+        if( !online ){
+            $( '.modal-body p' ).text('Your network is disconnected');
+        }
         var emailRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/g;
         var email = $('#email').val();
         var emailResult = emailRegex.test( email );
@@ -253,7 +258,8 @@ $(function() {
         if( !message && !emailResult && !nameResult ){
             $('.modal-body p').text(`Please fill out the form.`);
         }
-        if( nameResult && emailResult && message ){
+        if( nameResult && emailResult && message && online ){
+            $('body').append(spinner);
             $.ajax({
                 url: 'mail_handler.php',
                 method: 'POST',
@@ -269,6 +275,13 @@ $(function() {
                     $('.modal-title').text('Your email has been sent')
                     $('.modal-body p').text(`Thank you for reaching out to me! I will respond back to ${email} as soon as I can.`)
                     $('.modal').modal();
+                    spinner.remove();
+                },
+                error: (error) => {
+                    $('.modal-title').text('Your email failed')
+                    $('.modal-body p').text(`There has been an issue sending your email. I sincerely appologize for the error, and ask that you try again, or attempt to reach me directly at blackmongerry@gmail.com`)
+                    $('.modal').modal();
+                    spinner.remove();
                 }
             });
         }
@@ -305,8 +318,11 @@ $(function() {
                     format: "on"
                 });
             }
-            $('.dynamicPhoneCreation').text(' (909) 454-8451')
-            $('.dynamicEmailCreation').text(' blackmongerry@gmail.com')
-    });
+        $('.dynamicPhoneCreation').text(' (909) 454-8451');
+        $('.dynamicEmailCreation').text(' blackmongerry@gmail.com');
+        spinner = $('<div>', {class: 'email-loader'});
+
+        });
 
 });
+var spinner;

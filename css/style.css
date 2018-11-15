@@ -1640,14 +1640,37 @@ ul.countdown li {
 
   .footer-social a {
     margin: 0 10px; } }
-@media screen and (max-width: 575px) {
+  .email-loader {
+    border: 16px solid #000000;
+    border-top: 16px solid #6c7e8a;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @media screen and (max-width: 575px) {
   .header .caption h1 {
     font-size: 20px;
-    margin-top: 5px; } }
+    margin-top: 5px; } 
+  .loader{
+    left: 25%;
+  }}
 @media screen and (max-height: 415px){
   .navbar *{
     padding: 0px;
   }
 
 }
+
+
 /*# sourceMappingURL=style.css.map */
