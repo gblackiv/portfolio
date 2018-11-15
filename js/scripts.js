@@ -230,7 +230,12 @@ $(function() {
 
     SetResizeContent();
 
+
     function sendEmail( event ){
+        var online = navigator.onLine;
+        if( !online ){
+            $( '.modal-body p' ).text('Your network is disconnected');
+        }
         var emailRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/g;
         var email = $('#email').val();
         var emailResult = emailRegex.test( email );
@@ -253,7 +258,7 @@ $(function() {
         if( !message && !emailResult && !nameResult ){
             $('.modal-body p').text(`Please fill out the form.`);
         }
-        if( nameResult && emailResult && message ){
+        if( nameResult && emailResult && message && online ){
             $.ajax({
                 url: 'mail_handler.php',
                 method: 'POST',
