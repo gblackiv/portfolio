@@ -255,7 +255,11 @@ $(function() {
             $('.modal-title').text('A field was filled out incorrectly')
             $('.modal-body p').text(`Please enter a valid name and email address.`);
         }
-        var message = $('#message').val();
+        var message = $('#message').val().split('');
+        while(message[message.length - 1] === ' '){
+            message.splice(message.length - 1, 1);
+        }
+        message = message.join('');
         if( !message ){
             $('.modal-title').text('A field was filled out incorrectly')
             $('.modal-body p').text(`Please enter a message.`);
