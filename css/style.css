@@ -1671,6 +1671,9 @@ ul.countdown li {
   }
 
 }
+.col-lg-4.col-md-4.item.text-center:hover, .col-lg-4.col-md-3.item.text-center:hover{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px !important;
+}
 
 
 /*# sourceMappingURL=style.css.map */
