@@ -252,7 +252,6 @@ $(function() {
             $('.modal-body p').text(`Please enter a valid name and email address.`);
         }
         var message = $('#message').val().split('');
-        debugger;
         while(message[message.length - 1] === ' '){
             message.splice(message.length - 1, 1);
         }
