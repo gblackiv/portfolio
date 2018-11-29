@@ -234,28 +234,38 @@ $(function() {
     function sendEmail( event ){
         var online = navigator.onLine;
         if( !online ){
+            $( '.modal-title' ).text('Network error');
             $( '.modal-body p' ).text('Your network is disconnected');
         }
         var emailRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/g;
         var email = $('#email').val();
         var emailResult = emailRegex.test( email );
         if( !emailResult ){
+            $('.modal-title').text('A field was filled out incorrectly')
             $('.modal-body p').text('Please enter a valid email address.');
         }
         var nameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
         var name = $('#name').val();
         var nameResult = nameRegex.test( name );
         if( !nameResult ){
+            $('.modal-title').text('A field was filled out incorrectly')
             $('.modal-body p').text(`Please enter a valid name.`);
         }
         if( !nameResult && !emailResult ){
+            $('.modal-title').text('A field was filled out incorrectly')
             $('.modal-body p').text(`Please enter a valid name and email address.`);
         }
-        var message = $('#message').val();
+        var message = $('#message').val().split('');
+        while(message[message.length - 1] === ' '){
+            message.splice(message.length - 1, 1);
+        }
+        message = message.join('');
         if( !message ){
+            $('.modal-title').text('A field was filled out incorrectly')
             $('.modal-body p').text(`Please enter a message.`);
         }
         if( !message && !emailResult && !nameResult ){
+            $('.modal-title').text('A field was filled out incorrectly')
             $('.modal-body p').text(`Please fill out the form.`);
         }
         if( nameResult && emailResult && message && online ){
@@ -286,7 +296,6 @@ $(function() {
             });
         }
         else{
-            $('.modal-title').text('A field was filled out incorrectly')
             $('.modal').modal();
         }
     }
